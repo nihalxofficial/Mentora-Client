@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { User, Mail, Lock, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { authClient } from '@/lib/auth-client';
+import { toast } from 'react-toastify';
 
 export default function Register() {
     const router = useRouter();
@@ -21,14 +22,15 @@ export default function Register() {
             password: registerData.password,
             image: registerData.image
         });
-        if(data){
+        if (data) {
+            toast.success("SignUp Successful! 🎉")
             router.push("/")
         }
-        console.log(data);
-        
-        if(error){
-            alert(error.message)
+
+        if (error) {
+            toast.error(error.message)
         }
+
     }
 
     return (

@@ -7,14 +7,31 @@ import Link from 'next/link';
 import { Mail, Lock, ArrowRight } from 'lucide-react';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import { authClient } from '@/lib/auth-client';
 
 export default function Login() {
+    const router = useRouter();
     const handleLogin = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget)
 
         const loginData = Object.fromEntries(formData.entries());
+
+        const { data, error } = await authClient.signIn.email({
+            email: loginData.email,
+            password: loginData.password
+            // rememberMe: true,
+        });
+        if(data){
+            toast.success("Login Successful! 🎉")
+            router.push("/");
+        }
+        if(error){
+            toast.error(error.message)
+        }
 
 
     }
