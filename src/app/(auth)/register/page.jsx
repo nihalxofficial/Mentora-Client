@@ -1,22 +1,34 @@
 'use client';
 
 import { Button, Input } from '@heroui/react';
-
 import Link from 'next/link';
 import { User, Mail, Lock, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { authClient } from '@/lib/auth-client';
 
 export default function Register() {
     const router = useRouter();
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        // console.log(e.currentTarget);
 
         const formData = new FormData(e.currentTarget)
-        // console.log(formData);
 
         const registerData = Object.fromEntries(formData.entries());
+        const { data, error } = await authClient.signUp.email({
+            name: registerData.name,
+            email: registerData.email,
+            password: registerData.password,
+            image: registerData.image
+        });
+        if(data){
+            router.push("/")
+        }
+        console.log(data);
+        
+        if(error){
+            alert(error.message)
+        }
     }
 
     return (
