@@ -20,7 +20,7 @@ export default function Login() {
     }
     return (
         <div className="min-h-[80vh]  flex flex-col bg-slate-50">
-            <div className="flex items-center justify-center p-4 w-6/12 mx-auto">
+            <div className="flex items-center justify-center p-4 ">
                 <div className="w-full max-w-md">
                     <div className="bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-2xl space-y-8 relative overflow-hidden">
                         {/* Decorative element */}
