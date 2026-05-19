@@ -3,22 +3,33 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { jwt } from "better-auth/plugins";
 
-const client = new MongoClient(process.env.MONGO_URI);
-const db = client.db("mentora");
+let client;
+let db;
+
+function getDb() {
+  if (!client) {
+    if (!process.env.MONGO_URI) throw new Error("MONGO_URI is not set");
+    client = new MongoClient(process.env.MONGO_URI);
+    db = client.db("mentora");
+  }
+  return { client, db };
+}
+
+const { client: mongoClient, db: mongoDB } = getDb();
 
 export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  database: mongodbAdapter(db, {
-    client,
+  database: mongodbAdapter(mongoDB, {
+    client: mongoClient,
   }),
   session: {
     cookieCache: {
       enabled: true,
       strategy: "jwt",
-      maxAge: 5*24*60*60
-    }
+      maxAge: 5 * 24 * 60 * 60,
+    },
   },
   plugins: [jwt()],
 });
