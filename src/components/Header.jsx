@@ -91,7 +91,7 @@ export function MainNavbar() {
                     </Link>
                     <button
                       onClick={handleLogOut}
-                      className="px-4 py-2 text-sm text-red-500 hover:bg-red-50 flex items-center gap-3 transition-colors text-left">
+                      className="px-4 py-2 text-sm text-red-500 hover:bg-red-50 cursor-pointer flex items-center gap-3 transition-colors text-left">
                       <LogOut className="w-4 h-4" /> Log Out
                     </button>
                   </div>
