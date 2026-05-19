@@ -1,18 +1,20 @@
 
 import EnrollmentButton from '@/components/EnrollmentButton';
+import { auth } from '@/lib/auth';
 import { getCourseById } from '@/lib/courses/data';
 import { Chip } from '@heroui/react';
 import { BookOpen, Clock, BarChart, Users } from 'lucide-react';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 
 
 export default async function CourseDetails({ params }) {
+    const {token} = await auth.api.getToken({
+        headers: await headers(),
+      });
     const {id} = await params
-    const course = await getCourseById(id)
+    const course = await getCourseById(id, token)
     const { _id, enrollCount, title, thumbnail, description, category, price, duration, instructor } = course;
-
-    // console.log(course);
-
 
     const featuredItems = [
         { icon: Clock, label: duration || '12h 30m' },

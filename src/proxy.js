@@ -7,14 +7,14 @@ export async function proxy(request) {
     headers: await headers(),
   });
   const user = session?.user;
-  if(user){
+  if (user) {
     return NextResponse.next();
-  }else{
-      return NextResponse.redirect(new URL("/login", request.url));
+  } else {
+    console.log(request.url);
+    return NextResponse.redirect(new URL("/login", request.url));
   }
-
 }
 
 export const config = {
-  matcher: "/courses/:id",
+  matcher: ["/courses/:id","/add-course","/dashboard"],
 };

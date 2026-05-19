@@ -10,8 +10,12 @@ export const getFeaturedCourses = async()=>{
     return courses;
 }
 
-export const getCourseById = async(id)=>{
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/courses/${id}`);
+export const getCourseById = async(id, token)=>{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/courses/${id}`,{
+        headers: {
+            authorization : `Bearer ${token}` || ""
+        }
+    });
     const course = await res.json();
     return course;
 }
