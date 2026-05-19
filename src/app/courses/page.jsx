@@ -5,8 +5,8 @@ import { Button } from "@heroui/react";
 import { BookOpen, Filter } from "lucide-react";
 
 const CoursesPage = async ({ searchParams }) => {
-    const courses = await getCourses();
-
+    const searchParam = await searchParams;
+    const courses = await getCourses(searchParam.search);
 
     return (
         <div className="min-h-screen bg-slate-50">
