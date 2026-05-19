@@ -21,7 +21,7 @@ export default async function CourseDetails({ params }) {
         { icon: BarChart, label: title || 'Beginner' },
         { icon: BookOpen, label: `24 Lessons` },
         { icon: Users, label: `${enrollCount || 0} Students` },
-    ];
+    ]; 
     return (
         <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">

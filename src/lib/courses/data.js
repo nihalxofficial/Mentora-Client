@@ -19,3 +19,12 @@ export const getCourseById = async(id, token)=>{
     const course = await res.json();
     return course;
 }
+export const getEnrollmentsByUserID = async(id, token)=>{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/enrollments/${id}`,{
+        headers: {
+            authorization : `Bearer ${token}` || ""
+        }
+    });
+    const course = await res.json();
+    return course;
+}

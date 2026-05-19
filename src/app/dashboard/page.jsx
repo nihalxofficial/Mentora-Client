@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import CancelEnrollButton from '@/components/CancelEnrollButton';
+import { getEnrollmentsByUserID } from '@/lib/courses/data';
 
 export default async function DashboardPage() {
 
@@ -16,21 +17,23 @@ export default async function DashboardPage() {
         headers: await headers()
     })
 
-    const enrollments = []
+    const enrollments = await getEnrollmentsByUserID(session?.user?.id, token)
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-12">
             <div className="flex flex-col md:flex-row gap-8 items-start">
                 {/* Profile */}
-                <div className="w-full md:w-1/4">
-                    <div className="p-6 bg-white border rounded-2xl">
-                        <Image
+                <div className="w-full md:w-2/4 min-h-20">
+                    <div className="p-6 bg-white border rounded-2xl ">
+                        <div className='flex justify-center items-center'>
+                            <Image
                             src={session?.user?.image}
                             alt="profile"
                             width={96}
                             height={96}
                             className="w-24 h-24 rounded-full"
                         />
+                        </div>
 
                         <h2 className="text-xl font-bold mt-4">{session?.user?.name}</h2>
                         <p className="text-sm text-slate-500">{session?.user?.email}</p>
@@ -38,7 +41,7 @@ export default async function DashboardPage() {
                 </div>
 
                 {/* Enrollments */}
-                <div className="w-full md:w-3/4">
+                <div className="w-full md:w-2/4">
                     <h1 className="text-3xl font-bold mb-6">My Enrolled Courses</h1>
 
                     {enrollments?.length === 0 ? (
@@ -65,7 +68,7 @@ export default async function DashboardPage() {
                                     <div className="flex flex-col grow justify-between">
                                         <div>
                                             <h3 className="font-bold">{enrollment?.courseTitle}</h3>
-                                            <p className="text-sm text-slate-500">{new Date(enrollment?.enrolledAt).toDateString()}</p>
+                                            <p className="text-sm text-slate-500">{new Date(enrollment?.enrollAt).toDateString()}</p>
                                         </div>
 
                                         <div className="flex justify-between items-center">
