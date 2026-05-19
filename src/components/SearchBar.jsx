@@ -14,9 +14,9 @@ const SearchBar = () => {
   const handleSearch = () => {
     const params = new URLSearchParams(searchParams.toString())
     if (search) {
-      params.set("searchTerm", search)
+      params.set("search", search)
     } else {
-      params.delete("searchTerm")
+      params.delete("search")
     }
     router.push(`/courses?${params.toString()}`)
 
