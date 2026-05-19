@@ -33,7 +33,11 @@ export default function Login() {
             toast.error(error.message)
         }
 
-
+        // const { data:tokenData } = await authClient.token()
+        // if(tokenData){
+        //   console.log(tokenData);
+          
+        // }
     }
     return (
         <div className="min-h-[80vh]  flex flex-col bg-slate-50">

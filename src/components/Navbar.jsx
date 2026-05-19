@@ -14,8 +14,6 @@ export function MainNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
   const { data: session, isPending } = useSession();
-  // console.log(session);
-
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -65,7 +63,7 @@ export function MainNavbar() {
                 </Link>
               </> :
                 <div className="relative group">
-                  <button className="flex items-center gap-3 p-1 rounded-full hover:bg-blue-600  transition-colors border border-transparent hover:border-border cursor-pointer">
+                  <button className="flex items-center gap-3 p-1 rounded-full hover:shadow-md hover:bg-white  transition-colors border border-transparent hover:border-border cursor-pointer">
                     <Image
                       width={40}
                       height={40}
