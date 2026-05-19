@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { jwt } from "better-auth/plugins";
 
-const client = new MongoClient(process.env.MONGO_URI || "mongodb://placeholder");
+const client = new MongoClient(process.env.MONGO_URI);
 const db = client.db("mentora");
 
 export const auth = betterAuth({
@@ -17,8 +17,8 @@ export const auth = betterAuth({
     cookieCache: {
       enabled: true,
       strategy: "jwt",
-      maxAge: 5 * 24 * 60 * 60,
-    },
+      maxAge: 5*24*60*60
+    }
   },
   plugins: [jwt()],
 });
